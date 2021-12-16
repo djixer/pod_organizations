@@ -1,3 +1,5 @@
+style
+  |  table { width: 100%; border-collapse: collapse; } td, th { border: 1px solid #98bf21; padding: 3px 7px 2px 7px; } th { text-align: left; padding: 1px; background-color: red; color: white; } tr:nth-child(odd) { background-color: #EAF2D3; }
 table
   thead
     tr
@@ -9,4 +11,9 @@ table
       tr
         td = org['id']
         td = org['title']
-        td = 
+        td
+          | <a href='https://data.gov.ru/api/json/organization/
+          = org['id']
+          | /dataset/?access_token=
+          = @auth_token
+          | ">Получить данные
