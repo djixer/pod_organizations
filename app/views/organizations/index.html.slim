@@ -1,0 +1,12 @@
+table
+  thead
+    tr
+      th ID
+      th Название
+      th Запрос данных
+  tbody
+    - @organizations.each do |org|
+      tr
+        td = org['id']
+        td = org['title']
+        td = 
