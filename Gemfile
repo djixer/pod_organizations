@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'slim-rails'
 gem 'pg'
+gem 'bootstrap', '~> 5.1.3'
+gem 'jquery-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
