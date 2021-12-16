@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
   before_action :set_organizations
 
   def index
+    @organizations = Organization.all
   end
 
   def show
