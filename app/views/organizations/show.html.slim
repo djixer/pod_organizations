@@ -1,19 +1,25 @@
-p
-  | Идентификатор организации: 
-  b = @organization[:pod_id]
-p
-  | Название организации: 
-  b = @organization[:title]
-br
-table
-  thead
-    tr
-      th Идентификатор
-      th Название
-      th Рубрика
-  tbody
+ .container
+  p
+    | Идентификатор организации: 
+    b = @organization[:pod_id]
+  p
+    | Название организации: 
+    b = @organization[:title]
+  br
+
+  - if @organization[:dataset] != "Для данной организации нет данных."
+    table.table.table-striped
+      thead
+        tr
+          th Идентификатор
+          th Название
+          th Рубрика
+      tbody
+        - JSON.parse(@organization[:dataset]).each do |hash|
+          tr
+            td = hash['identifier']
+            td = hash['title']
+            td = hash['topic']
+
+  - else
     = @organization[:dataset]
-      tr
-        td
-        td
-        td

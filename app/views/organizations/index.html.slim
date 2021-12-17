@@ -1,16 +1,16 @@
-table
-  thead
-    tr
-      th ID
-      th Название
-      th Запрос данных
-  tbody
-    - @organizations.each do |organization|
+  table.table.table-striped
+    thead
       tr
-        td = organization[:pod_id]
-        td = organization[:title]
-        td
-          - if organization[:dataset].nil?
-            = link_to "Получить данные", organization
-          - else
-            = link_to 'Посмотреть данные', organization
+        th ID
+        th Название
+        th Запрос данных
+    tbody
+      - @organizations.each do |organization|
+        tr
+          td = organization[:pod_id]
+          td = organization[:title]
+          td[width="180"]
+            - if organization[:dataset].nil?
+              = link_to "Получить данные", organization
+            - else
+              = link_to 'Посмотреть данные', organization

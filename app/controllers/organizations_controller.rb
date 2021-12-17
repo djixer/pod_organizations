@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :update]
 
   def index
-    @organizations = Organization.all
+    @organizations = Organization.all.order(:title)
     if @organizations.empty?
       get_organizations
     end
@@ -14,12 +14,6 @@ class OrganizationsController < ApplicationController
     end
 
   end
-
-  def update
-    @organization.update(dataset: get_dataset)
-    redirect_to organization_show_path(@organization)
-  end
-
 
   private
 
@@ -46,7 +40,7 @@ class OrganizationsController < ApplicationController
     uri = URI(url)
     response = Net::HTTP.get(uri)
 
-    response == "[]" ? "Для данной организации нет данных." : JSON.parse(response)
+    response == "[]" ? "Для данной организации нет данных." : response
   end
 
   def get_token
