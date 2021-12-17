@@ -1,4 +1,4 @@
- .container
+.container
   p
     | Идентификатор организации: 
     b = @organization[:pod_id]
@@ -22,4 +22,10 @@
             td = hash['topic']
 
   - else
+    - @status = true
     = @organization[:dataset]
+
+  div[align="center"]
+    = link_to 'Экспортировать данные', organization_path(format: :zip), class: "btn btn-secondary"
+    |  
+    = link_to 'Удалить', @organization, method: :delete, data: { confirm: 'Это действие удалит организацию и все её данные из списка. Продолжить?' }, class: "btn btn-danger"

@@ -26,6 +26,7 @@ gem 'slim-rails'
 gem 'pg'
 gem 'bootstrap', '~> 5.1.3'
 gem 'jquery-rails'
+gem 'rubyzip'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
