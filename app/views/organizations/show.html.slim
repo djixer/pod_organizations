@@ -26,6 +26,9 @@
     = @organization[:dataset]
 
   div[align="center"]
-    = link_to 'Экспортировать данные', organization_path(format: :zip), class: "btn btn-secondary"
+    - if @organization[:dataset] == "Для данной организации нет данных."
+      = link_to 'Экспортировать данные', organization_path(format: :zip), class: "btn btn-secondary disabled"
+    - else
+      = link_to 'Экспортировать данные', organization_path(format: :zip), class: "btn btn-secondary"
     |  
     = link_to 'Удалить', @organization, method: :delete, data: { confirm: 'Это действие удалит организацию и все её данные из списка. Продолжить?' }, class: "btn btn-danger"
