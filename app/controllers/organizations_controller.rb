@@ -1,4 +1,5 @@
 class OrganizationsController < ApplicationController
+  before_action :set_organization, only: [:show, :update]
 
   def index
     @organizations = Organization.all
@@ -8,17 +9,27 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    @organization = Organization.find(params[:pod_id])
+    if @organization[:dataset].nil?
+      @organization.update(dataset: get_dataset)
+    end
+
   end
+
+  def update
+    @organization.update(dataset: get_dataset)
+    redirect_to organization_show_path(@organization)
+  end
+
 
   private
 
-  def get_organizations
-    @auth_token = open('/usr/src/token').read
-    require 'json'
-    require 'net/http'
+  def set_organization
+    @organization = Organization.find(params[:id])
+  end
 
-    url = 'https://data.gov.ru/api/json/organization/?access_token=' + @auth_token
+  def get_organizations
+    include_net_libs
+    url = 'https://data.gov.ru/api/json/organization/?access_token=' + get_token
     uri = URI(url)
     response = Net::HTTP.get(uri)
     organizations = JSON.parse(response)
@@ -28,18 +39,18 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  def get_data
+  def get_dataset
     include_net_libs
-    get_token
 
-    url = 'https://data.gov.ru/api/json/organization/' + params[:pod_id] + '/?access_token=' + @auth_token
+    url = 'https://data.gov.ru/api/json/organization/' + @organization[:pod_id] + '/dataset/?access_token=' + get_token
     uri = URI(url)
     response = Net::HTTP.get(uri)
-    data = JSON.parse(response)
+
+    response == "[]" ? "Для данной организации нет данных." : JSON.parse(response)
   end
 
   def get_token
-    @auth_token = open('/usr/src/token').read
+    open('/usr/src/token').read
   end
 
   def include_net_libs

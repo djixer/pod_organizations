@@ -1,0 +1,19 @@
+p
+  | Идентификатор организации: 
+  b = @organization[:pod_id]
+p
+  | Название организации: 
+  b = @organization[:title]
+br
+table
+  thead
+    tr
+      th Идентификатор
+      th Название
+      th Рубрика
+  tbody
+    = @organization[:dataset]
+      tr
+        td
+        td
+        td
